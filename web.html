@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="kk">
+<head>
+<meta charset="UTF-8">
+<title>Отырар | Финал Жоба</title>
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{
+font-family:Segoe UI,Arial;
+background:linear-gradient(135deg,#fff4cc,#ffd6a0);
+overflow-x:hidden;
+transition:.4s;
+}
+
+/* DARK MODE */
+body.dark{background:#0b0b0b;color:white}
+body.dark section{background:#1a1a1a}
+body.dark nav{background:#111}
+body.dark nav a, body.dark nav button{background:#222;color:white}
+
+/* TOP BAR */
+.top-bar{
+position:fixed;top:0;left:0;width:100%;
+background:black;color:#00ff00;
+padding:10px 20px;
+z-index:10000;
+font-weight:bold;
+display:flex;justify-content:space-between;
+animation:neon 2s infinite alternate;
+}
+@keyframes neon{
+from{box-shadow:0 0 5px lime}
+to{box-shadow:0 0 25px lime}
+}
+
+/* LOGIN */
+#login-overlay{
+position:fixed;inset:0;
+background:radial-gradient(circle,#400,#000);
+display:flex;align-items:center;justify-content:center;
+z-index:9999;color:white;
+}
+.login-box{
+background:black;padding:25px;
+border-radius:15px;width:300px;
+text-align:center;
+box-shadow:0 0 20px red;
+}
+.login-box input,.login-box button{
+width:100%;padding:10px;margin-top:10px;
+border-radius:8px;border:none;
+}
+.login-box button{
+background:darkred;color:white;font-weight:bold;
+}
+
+/* HEADER */
+header{
+margin-top:60px;
+background:linear-gradient(90deg,#8b0000,firebrick);
+color:white;padding:25px;
+font-size:28px;text-align:center;
+}
+
+/* NAV */
+nav{
+position:fixed;top:110px;left:0;
+width:240px;height:100%;
+background:#fff1c1;padding:15px;
+}
+nav a, nav button{
+display:block;margin:12px 0;padding:12px;
+border-radius:12px;background:white;
+text-decoration:none;color:darkred;
+font-weight:bold;border:none;cursor:pointer;
+transition:.4s;
+}
+nav a:hover, nav button:hover{
+background:darkred;color:white;
+transform:translateX(10px);
+}
+
+/* MAIN */
+main{margin-left:260px;padding:30px}
+section{
+background:white;margin-bottom:40px;
+padding:25px;border-radius:20px;
+opacity:0;transform:translateY(50px);
+transition:1s;
+}
+section.show{
+opacity:1;transform:translateY(0);
+box-shadow:0 0 20px rgba(0,0,0,.4);
+}
+
+h2{
+color:darkred;
+border-left:6px solid darkred;
+padding-left:12px;margin-bottom:10px;
+}
+
+iframe,video{
+width:100%;max-width:750px;
+border-radius:15px;
+border:3px solid darkred;
+}
+
+/* FILTER */
+select{
+padding:12px;border-radius:12px;
+border:2px solid darkred;
+font-size:16px;margin-top:10px;
+}
+
+.cards{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(230px,1fr));
+gap:18px;margin-top:20px;
+}
+
+.card{
+background:white;
+border-radius:15px;
+padding:12px;
+border:2px solid darkred;
+text-align:center;
+transition:.5s;
+}
+.card:hover{
+transform:scale(1.07);
+box-shadow:0 0 20px red;
+}
+.card img{
+width:100%;
+border-radius:12px;
+margin-bottom:8px;
+}
+
+/* ПІКІР ФОРМА */
+form input, form textarea{
+width:100%;
+padding:12px;
+margin-top:10px;
+border-radius:10px;
+border:2px solid darkred;
+font-size:16px;
+}
+form button{
+margin-top:12px;
+padding:12px;
+border:none;
+border-radius:10px;
+background:darkred;
+color:white;
+font-size:18px;
+cursor:pointer;
+}
+
+/* CURSOR */
+.custom-cursor{
+position:fixed;width:20px;height:20px;
+background:red;border-radius:50%;
+pointer-events:none;z-index:9999;
+transform:translate(-50%,-50%);
+}
+
+/* ABOUT + COPYRIGHT */
+.about-box{
+background:#fff1c1;
+border:2px solid darkred;
+border-radius:15px;
+padding:20px;
+text-align:center;
+}
+.about-box b{color:darkred}
+.copyright{
+margin-top:15px;
+padding:12px;
+background:black;
+color:white;
+border-radius:10px;
+font-size:14px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="top-bar">
+🕒 <span id="clock"></span> | 👁️ <span id="views"></span>
+</div>
+
+<!-- LOGIN -->
+<div id="login-overlay">
+  <div class="login-box">
+    <h3>🔐 Кіру</h3>
+    <input type="password" id="login-code" placeholder="2007">
+    <button onclick="login()">Кіру</button>
+    <p id="login-error"></p>
+  </div>
+</div>
+
+<header>🏰 ОТЫРАР — ФИНАЛ ЖОБА</header>
+
+<nav>
+<a href="#tarih">Тарих</a>
+<a href="#map">Карта</a>
+<a href="#video">Видео</a>
+<a href="#filter">🎯 Фильтр</a>
+<a href="#avtor">Пікір</a>
+<button onclick="toggleTheme()">🌙 / ☀</button>
+</nav>
+
+<main>
+
+<section id="tarih">
+<h2>Тарих</h2>
+<p>Отырар — Ұлы Жібек жолындағы тарихи қала.</p>
+</section>
+
+<section id="map">
+<h2>Карта</h2>
+<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d926081.818566829!2d67.8946005867581!3d42.849835963061!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4249f26f307d8f3f%3A0x69d1f7b3f5a9277b!2z0J7QstCz0L7Qu9CwLCDQmtGA0LDRgdC90L7Qs9GA0LDQvdCw0Y8g0JDQstGC0L7QtNC10YDRgdC40YLQtdC70YzQvdC-LCDQmtGA0LDRgdC90L7Qs9GA0LDQvdCw0Y8!5e0!3m2!1sru!2skz!4v1714677720000!5m2!1sru!2skz"
+width="600" height="450" allowfullscreen loading="lazy"></iframe>
+</section>
+
+<section id="video">
+<h2>Видео</h2>
+<video controls><source src="otyrar.mp4"></video>
+</section>
+
+<section id="filter">
+<h2>🎯 Нысандар фильтрі</h2>
+
+<select id="categorySelect" onchange="filterItems()">
+  <option value="all">Барлығы</option>
+  <option value="park">🌳 Саябақ (3)</option>
+  <option value="mausoleum">🕌 Арыстан баб (2)</option>
+  <option value="book">📚 Кітап (2)</option>
+</select>
+
+<div class="cards">
+<div class="card park"><img src="park1.jpg"><h4>Отырар орталық саябағы</h4></div>
+<div class="card park"><img src="park2.jpg"><h4>Аққұм саябағы</h4></div>
+<div class="card park"><img src="park3.jpg"><h4>Балалар саябағы</h4></div>
+
+<div class="card mausoleum"><img src="arslan1.jpg"><h4>Арыстан баб кесенесі</h4></div>
+<div class="card mausoleum"><img src="arslan2.jpg"><h4>Арыстан баб мұражайы</h4></div>
+
+<div class="card book"><img src="book1.jpg"><h4>Отырар тарихы</h4></div>
+<div class="card book"><img src="book2.jpg"><h4>Ұлы Жібек жолы</h4></div>
+</div>
+</section>
+
+<section id="avtor">
+<h2>Пікір қалдыру</h2>
+
+<form onsubmit="saveComment();return false;">
+  <input type="text" id="name" placeholder="Атың" required>
+  <input type="email" id="email" placeholder="Email" required>
+  <textarea id="comment" placeholder="Пікіріңді жаз..." required></textarea>
+  <button type="submit">📨 Жіберу</button>
+</form>
+
+<div id="comment-list"></div>
+</section>
+
+<!-- ✅ ӨЗІМ ЖАЙЛЫ + АВТОРЛЫҚ ҚҰҚЫҚ -->
+<section>
+  <h2>📌 Өзім жайлы</h2>
+  <div class="about-box">
+    <p><b>Аты-жөні:</b> Дүйсен Нұрсұлтан</p>
+    <p><b>Мектеп:</b> Отырар ауданы, Аққұм ауылы</p>
+    <p><b>Бағыты:</b> Computer Science</p>
+    <p><b>Бұл сайт:</b> Менің финалдық жобам</p>
+
+    <div class="copyright">
+      © 2025 | Барлық авторлық құқықтар қорғалған.  
+      Бұл сайтты көшіруге және рұқсатсыз қолдануға тыйым салынады.
+    </div>
+  </div>
+</section>
+
+</main>
+
+<div class="custom-cursor"></div>
+
+<script>
+// CURSOR
+let cursor=document.querySelector(".custom-cursor");
+document.addEventListener("mousemove",e=>{
+cursor.style.left=e.clientX+"px";
+cursor.style.top=e.clientY+"px";
+});
+
+// CLOCK
+setInterval(()=>{
+document.getElementById("clock").innerText=new Date().toLocaleTimeString();
+},1000);
+
+// VIEWS
+let views=localStorage.getItem("views")||0;
+views++;
+localStorage.setItem("views",views);
+document.getElementById("views").innerText=views;
+
+// FILTER
+function filterItems(){
+let val=document.getElementById("categorySelect").value;
+let cards=document.querySelectorAll(".card");
+cards.forEach(card=>{
+if(val==="all" || card.classList.contains(val)){
+card.style.display="block";
+}else{
+card.style.display="none";
+}
+});
+}
+
+// LOGIN
+function login(){
+let code=document.getElementById("login-code").value.trim();
+if(code==="2007"){
+document.getElementById("login-overlay").style.display="none";
+document.getElementById("login-error").innerText="";
+}else{
+document.getElementById("login-error").innerText="❌ Қате пароль!";
+}
+}
+
+// DARK MODE
+function toggleTheme(){
+document.body.classList.toggle("dark");
+}
+
+// SCROLL
+let sections=document.querySelectorAll("section");
+window.addEventListener("scroll",()=>{
+sections.forEach(sec=>{
+if(sec.getBoundingClientRect().top<window.innerHeight-100){
+sec.classList.add("show");
+}
+});
+});
+
+// ПІКІР САҚТАУ
+function saveComment(){
+let name=document.getElementById("name").value;
+let email=document.getElementById("email").value;
+let text=document.getElementById("comment").value;
+
+let box=document.createElement("div");
+box.style.border="2px solid darkred";
+box.style.padding="10px";
+box.style.marginTop="10px";
+box.innerHTML="<b>"+name+"</b> ("+email+")<br>"+text;
+
+document.getElementById("comment-list").prepend(box);
+
+document.getElementById("name").value="";
+document.getElementById("email").value="";
+document.getElementById("comment").value="";
+}
+</script>
+
+</body>
+</html>
